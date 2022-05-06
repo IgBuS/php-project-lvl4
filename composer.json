@@ -10,6 +10,7 @@
         "laravel/framework": "^9.11",
         "laravel/sanctum": "^2.15.1",
         "laravel/tinker": "^2.7",
+        "laravel/ui": "^3.4",
         "rollbar/rollbar-laravel": "^7.2"
     },
     "require-dev": {
