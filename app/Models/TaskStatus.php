@@ -20,4 +20,9 @@ class TaskStatus extends Model
         ];
         return $statuses;
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'status_id');
+    }
 }

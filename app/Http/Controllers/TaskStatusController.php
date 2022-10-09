@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskStatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(TaskStatus::class, 'task_status');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,8 +31,8 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        $status = new TaskStatus();
-        return view('statuses.create', compact('status'));
+        $taskStatus = new TaskStatus();
+        return view('statuses.create', compact('taskStatus'));
     }
 
     /**
@@ -52,10 +57,10 @@ class TaskStatusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\TaskStatus  $taskStatus
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TaskStatus  $taskStatus)
     {
         //
     }
@@ -63,16 +68,12 @@ class TaskStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\TaskStatus  $taskStatus
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TaskStatus $taskStatus)
     {
-        if (Auth::check()) {
-            $status = TaskStatus::findOrFail($id);
-            return view('statuses.edit', compact('status'));
-        }
-        abort(401);
+        return view('statuses.edit', compact('taskStatus'));
 
     }
 
@@ -80,40 +81,34 @@ class TaskStatusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\TaskStatus  $taskStatus
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TaskStatus $taskStatus)
     {
-        //
-        if (Auth::check()) {
-            $validated = $request->validate([
-                'name' => 'unique:task_statuses'
-            ]);
-            $status = TaskStatus::findOrFail($id);
-            $status->fill($validated);
-            $status->save();
-            flash('Статус успешно обновлен')->success();
-            return redirect()
-                ->route('task_statuses.index');
-        }
-        abort(401);
+        $validated = $request->validate([
+            'name' => 'unique:task_statuses'
+        ]);
+        $taskStatus->fill($validated);
+        $taskStatus->save();
+        flash('Статус успешно обновлен')->success();
+        return redirect()
+            ->route('task_statuses.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\TaskStatus  $taskStatus
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TaskStatus $taskStatus)
     {
-        if (Auth::check()) {
-            TaskStatus::findOrFail($id)->delete();
+        if($taskStatus->tasks()->count() === 0){
+            $taskStatus->delete();
             flash('Статус успешно удален')->success();
             return redirect()->route('task_statuses.index');
         }
-
         flash('Не удалось удалить статус')->error();
         return redirect()->route('task_statuses.index');
     }

@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('Статусы') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('tasks.index') }}">{{ __('Задачи') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

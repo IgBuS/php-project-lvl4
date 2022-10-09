@@ -6,11 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\TaskStatus;
+use App\Models\Task;
 use App\Models\User;
 use Database\Seeders\TaskStatusSeeder;
 use Illuminate\Support\Facades\Auth;
 
-class TaskFactoryTest extends TestCase
+class TaskStatusFactoryTest extends TestCase
 {
     use RefreshDatabase;
  
@@ -40,17 +41,16 @@ class TaskFactoryTest extends TestCase
 
     public function testEditWithoutAuth()
     {   
-        Auth::logout();
         $status = TaskStatus::factory()->create();
-        $response = $this->get(route('task_statuses.edit', [$status]));
-        $response->assertUnauthorized();
+        $response = $this->get(route('task_statuses.edit', $status));
+        $response->assertForbidden();
     }
 
     public function testEditWithAuth()
     {
         $user = User::factory()->create();
         $status = TaskStatus::factory()->create();
-        $response = $this->actingAs($user)->get(route('task_statuses.edit', [$status]));
+        $response = $this->actingAs($user)->get(route('task_statuses.edit', $status));
         $response->assertOk();
     }
 
@@ -83,10 +83,28 @@ class TaskFactoryTest extends TestCase
         $user = User::factory()->create();
 
         $status = TaskStatus::factory()->create();
-        $response = $this->actingAs($user)->delete(route('task_statuses.destroy', $status['id']));
+        $response = $this->actingAs($user)->delete(route('task_statuses.destroy', $status));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('task_statuses.index'));
 
         $this->assertDatabaseMissing('task_statuses', $status->only('id'));
+    }
+
+    public function testDestroyWithActiveTask()
+    {
+        $user = User::factory()->create();
+        $status = TaskStatus::factory()->create();
+
+        $this->assertDatabaseHas('task_statuses', $status->toArray());
+
+        $task = Task::factory()
+        ->for($user, 'created_by')
+        ->for($status, 'status')
+        ->create();
+
+        $response = $this->actingAs($user)->delete(route('task_statuses.destroy', $status));
+        $response->assertRedirect(route('task_statuses.index'));
+
+        $this->assertDatabaseHas('task_statuses', $status->toArray());
     }
 }

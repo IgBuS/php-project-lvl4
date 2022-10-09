@@ -20,21 +20,21 @@
     </tr>
   </thead>
   <tbody>
-    @foreach ($taskStatuses as $status)
+    @foreach ($taskStatuses as $taskStatus)
     <tr>
-      <th scope="row">{{ $status->id }}</th>
+      <th scope="row">{{ $taskStatus->id }}</th>
         <td>
-            <a class="link " href="/task_statuses/{{$status->id}}">{{ $status->name }}</a>
+            <a class="link " href="/task_statuses/{{$taskStatus->id}}">{{ $taskStatus->name }}</a>
         </td>
-      <td>{{ $status->created_at }}</td>
+      <td>{{ $taskStatus->created_at }}</td>
       @auth
       <td> 
-      <form action="{{ route('task_statuses.destroy',$status->id) }}" method="post">
+      <form action="{{ route('task_statuses.destroy',$taskStatus->id) }}" method="post">
         @csrf
         @method('delete')
         <button type="submit" class="remove"> Удалить </button>
       </form>  
-      <a href="{{route('task_statuses.edit', $status)}}">Редактировать</a></td>
+      <a href="{{route('task_statuses.edit', $taskStatus)}}">Редактировать</a></td>
       @endauth
     </tr>
     @endforeach
