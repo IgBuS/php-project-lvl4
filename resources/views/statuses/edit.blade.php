@@ -2,6 +2,6 @@
 @section('content')
 {{ Form::model($taskStatus, ['route' => ['task_statuses.update', $taskStatus], 'method' => 'PATCH']) }}
     @include('statuses.form')
-    {{ Form::submit('Обновить') }}
+    <button type="submit" class="btn btn-primary">Обновить</button>
 {{ Form::close() }}
 @endsection

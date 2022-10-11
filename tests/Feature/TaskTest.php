@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Task;
+use App\Models\Label;
 use Database\Seeders\TaskStatusSeeder;
 use Illuminate\Support\Facades\Auth;
 
@@ -88,11 +89,13 @@ class TaskFactoryTest extends TestCase
         $task = Task::factory()
         ->for($user, 'created_by')
         ->for(TaskStatus::factory()->create(), 'status')
+        ->hasAttached(Label::factory()->create())
         ->create();
 
         $data = Task::factory()
         ->for($user, 'created_by')
         ->for(TaskStatus::factory()->create(), 'status')
+        ->hasAttached(Label::factory()->create())
         ->raw();
 
 

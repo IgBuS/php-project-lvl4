@@ -12,7 +12,8 @@ class Task extends Model
         'name',
         'description',
         'status_id',
-        'assigned_to_id'
+        'assigned_to_id',
+        'labels'
     ];
 
     public function getid()
@@ -33,5 +34,20 @@ class Task extends Model
     public function assigned_to()
     {
         return $this->belongsTo(User::class, 'assigned_to_id');
+    }
+
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class);
+    }
+
+    public function labels_ids()
+    {
+        return $this->belongsToMany(Label::class)->pluck('labels.id')->toArray();
+    }
+
+    public function labels_names()
+    {
+        return $this->belongsToMany(Label::class)->pluck('labels.name')->toArray();
     }
 }

@@ -4,6 +4,8 @@
 
 {{ Form::model($task, ['route' => 'tasks.store']) }}
     @include('tasks.form')
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
 {{ Form::close() }}
 @endsection

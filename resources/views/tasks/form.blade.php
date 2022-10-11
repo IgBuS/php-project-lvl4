@@ -46,3 +46,15 @@
     @endforeach
 </select>
 </div>
+
+<div class="mb-3">
+<select multiple="multiple" name="labels[]" class="form-select" id="labels">
+    @foreach ($labels as $label)
+        @if(in_array($label->id, old('labels', optional($task)->labels_ids())))
+            <option value="{{$label->id}}"selected>{{$label->name}} </option>
+        @else
+            <option value="{{$label->id}}">{{$label->name}}</option>
+        @endif
+    @endforeach
+</select>
+</div>

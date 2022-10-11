@@ -3,7 +3,9 @@
 
 @section('content')
   @auth
+  <div class="mb-3">
     <a href="{{route('tasks.create')}}" class="btn btn-primary">Создать задачу</a>
+</div>
 
   @endauth
   <table class="table">

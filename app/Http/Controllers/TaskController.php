@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
+use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,10 +38,12 @@ class TaskController extends Controller
         $task = new Task();
         $rawUsers = User::orderBy('name', 'asc')->get();
         $rawTaskStatuses = TaskStatus::orderBy('name', 'asc')->get();
+        $labels = Label::orderBy('name', 'asc')->get();
         $data = [
             'task' => $task,
             'users' => $rawUsers,
-            'taskStatuses' => $rawTaskStatuses
+            'taskStatuses' => $rawTaskStatuses,
+            'labels' => $labels
         ];
         return view('tasks.create', $data);
     }
@@ -62,6 +65,7 @@ class TaskController extends Controller
         $task = new Task();
         $task->fill($validated);
         $task->created_by_id=Auth::user()->id;
+        $task->labels()->sync($request['labels']);
         $task->save();
 
         return redirect()
@@ -89,11 +93,13 @@ class TaskController extends Controller
     {
         $rawUsers = User::orderBy('name', 'asc')->get();
         $rawTaskStatuses = TaskStatus::orderBy('name', 'asc')->get();
+        $labels = Label::orderBy('name', 'asc')->get();
 
         $data = [
             'task' => $task,
             'users' => $rawUsers,
-            'taskStatuses' => $rawTaskStatuses
+            'taskStatuses' => $rawTaskStatuses,
+            'labels' => $labels
         ];
         return view('tasks.edit', $data);
     }
@@ -114,8 +120,9 @@ class TaskController extends Controller
             'assigned_to_id' => 'nullable'
         ]);
         $task->fill($validated);
+        $task->labels()->sync($request['labels']);
         $task->save();
-        flash('Статус успешно обновлен')->success();
+        flash('Задача успешно обновлена')->success();
         return redirect()
             ->route('tasks.index');
     }
