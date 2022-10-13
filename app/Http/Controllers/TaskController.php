@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Label;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
@@ -19,13 +21,31 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::orderBy('id', 'asc')->paginate();
-        return view('tasks.index', compact('tasks'));
+        $pespPersona = User::has('tasksAssignedTo')->orderBy('name', 'asc')->get();
+        $authors = User::has('tasksCreatedBy')->orderBy('name', 'asc')->get();
+        $rawTaskStatuses = TaskStatus::orderBy('name', 'asc')->get();
+
+        $tasks = QueryBuilder::for(Task::class)
+        ->allowedFilters([AllowedFilter::exact('status_id'),
+                        AllowedFilter::exact('assigned_to_id'),
+                        AllowedFilter::exact('created_by_id')])
+        ->paginate();
+
+        $data = [
+            'tasks' => $tasks,
+            'pespPersona' => $pespPersona,
+            'taskStatuses' => $rawTaskStatuses,
+            'authors' => $authors
+        ];
+
+        //$tasks = Task::orderBy('id', 'asc')->paginate();
+        return view('tasks.index', $data);
     }
 
     /**
@@ -65,8 +85,8 @@ class TaskController extends Controller
         $task = new Task();
         $task->fill($validated);
         $task->created_by_id=Auth::user()->id;
-        $task->labels()->sync($request['labels']);
         $task->save();
+        $task->labels()->sync($request['labels']);
 
         return redirect()
             ->route('tasks.index');

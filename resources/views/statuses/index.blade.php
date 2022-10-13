@@ -31,12 +31,19 @@
       <td>{{ $taskStatus->created_at }}</td>
       @auth
       <td> 
-      <form action="{{ route('task_statuses.destroy',$taskStatus->id) }}" method="post">
-        @csrf
-        @method('delete')
-        <button type="submit" class="btn btn-danger"> Удалить </button>
-      </form>  
-      <a href="{{route('task_statuses.edit', $taskStatus)}}">Редактировать</a>
+      <div class="form-inline">
+
+        <form action="{{ route('task_statuses.destroy',$taskStatus->id) }}" method="post">
+          @csrf
+          @method('delete')
+          <button type="submit" class="btn btn-outline-danger btn-sm"> Удалить </button>
+        </form>
+
+        <form action="{{ route('task_statuses.edit',$taskStatus->id) }}" method="get">
+          <button type="submit" class="btn btn-outline-info btn-sm"> Редактировать </button>
+        </form>
+
+      </div>
     </td>
       @endauth
     </tr>

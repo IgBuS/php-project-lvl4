@@ -33,13 +33,19 @@
       
       @auth
       <td> 
-      <form action="{{ route('labels.destroy',$label) }}" method="post">
-        @csrf
-        @method('delete')
-        <button type="submit" class="btn btn-danger"> Удалить </button>
-      </form>  
+      <div class="form-inline">
 
-      <a href="{{route('labels.edit', $label->id)}}">Редактировать</a>
+        <form action="{{ route('labels.destroy',$label) }}" method="post">
+          @csrf
+          @method('delete')
+          <button type="submit" class="btn btn-outline-danger btn-sm"> Удалить </button>
+        </form>
+
+        <form action="{{ route('labels.edit',$label->id) }}" method="get">
+          <button type="submit" class="btn btn-outline-info btn-sm"> Редактировать </button>
+        </form>
+
+      </div>
     </td>
       @endauth
     </tr>
