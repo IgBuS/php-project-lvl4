@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class TaskStatusFactoryTest extends TestCase
 {
     use RefreshDatabase;
- 
+
     /**
      * Test creating a new order.
      *
@@ -40,7 +40,7 @@ class TaskStatusFactoryTest extends TestCase
     }
 
     public function testEditWithoutAuth()
-    {   
+    {
         $status = TaskStatus::factory()->create();
         $response = $this->get(route('task_statuses.edit', $status));
         $response->assertForbidden();
@@ -98,7 +98,7 @@ class TaskStatusFactoryTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $status->toArray());
 
         $task = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for($status, 'status')
         ->create();
 

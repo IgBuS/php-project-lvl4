@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskStatus extends Model
 {
-    protected $fillable = ['name'];
     use HasFactory;
 
-    static function getNames()
+    protected $fillable = ['name'];
+
+
+    public static function getNames()
     {
         $statuses = [
-            "новый", 
+            "новый",
             "в работе",
             "на тестировании",
             "завершен"

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable(); // - необязательное. Описание задачи
             $table->bigInteger('status_id');// - обязательное. Связано с сущностью статуса
             $table->bigInteger('created_by_id');// - обязательное. Связано с сущностью пользователя. Создатель задачи
-            $table->bigInteger('assigned_to_id')->nullable();// - необязательное. Связано с сущностью пользователя. Тот на кого поставлена задача
+            $table->bigInteger('assigned_to_id')->nullable();// - необязательное.
+            //Связано с сущностью пользователя. Тот на кого поставлена задача
             $table->timestamps();
         });
     }

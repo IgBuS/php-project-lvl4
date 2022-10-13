@@ -60,7 +60,7 @@ class TaskStatusController extends Controller
      * @param  \App\Models\TaskStatus  $taskStatus
      * @return \Illuminate\Http\Response
      */
-    public function show(TaskStatus  $taskStatus)
+    public function show(TaskStatus $taskStatus)
     {
         //
     }
@@ -74,7 +74,6 @@ class TaskStatusController extends Controller
     public function edit(TaskStatus $taskStatus)
     {
         return view('statuses.edit', compact('taskStatus'));
-
     }
 
     /**
@@ -104,7 +103,7 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        if($taskStatus->tasks()->count() === 0){
+        if ($taskStatus->tasks()->count() === 0) {
             $taskStatus->delete();
             flash('Статус успешно удален')->success();
             return redirect()->route('task_statuses.index');

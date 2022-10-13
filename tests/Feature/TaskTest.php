@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class TaskFactoryTest extends TestCase
 {
     use RefreshDatabase;
- 
+
     /**
      * Test creating a new order.
      *
@@ -29,7 +29,7 @@ class TaskFactoryTest extends TestCase
 
         $tasks = Task::factory()
                     ->count(3)
-                    ->for(User::factory()->make(), 'created_by')
+                    ->for(User::factory()->make(), 'createdBy')
                     ->for(TaskStatus::factory()->make(), 'status')
                     ->make();
     }
@@ -48,9 +48,9 @@ class TaskFactoryTest extends TestCase
     }
 
     public function testEditWithoutAuth()
-    {   
+    {
         $task = Task::factory()
-            ->for(User::factory()->create(), 'created_by')
+            ->for(User::factory()->create(), 'createdBy')
             ->for(TaskStatus::factory()->create(), 'status')
             ->create();
         $response = $this->get(route('tasks.edit', $task));
@@ -61,7 +61,7 @@ class TaskFactoryTest extends TestCase
     {
         $user = User::factory()->create();
         $task = Task::factory()
-        ->for(User::factory()->create(), 'created_by')
+        ->for(User::factory()->create(), 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->create();
         $response = $this->actingAs($user)->get(route('tasks.edit', [$task]));
@@ -72,7 +72,7 @@ class TaskFactoryTest extends TestCase
     {
         $user = User::factory()->create();
         $data = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->raw();
         $response = $this->actingAs($user)->post(route('tasks.store'), $data);
@@ -87,13 +87,13 @@ class TaskFactoryTest extends TestCase
         $user = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->hasAttached(Label::factory()->create())
         ->create();
 
         $data = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->hasAttached(Label::factory()->create())
         ->raw();
@@ -111,12 +111,12 @@ class TaskFactoryTest extends TestCase
         $user = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->create();
 
         $data = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->raw();
 
@@ -132,7 +132,7 @@ class TaskFactoryTest extends TestCase
         $user = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->create();
         $response = $this->actingAs($user)->delete(route('tasks.destroy', $task));
@@ -149,7 +149,7 @@ class TaskFactoryTest extends TestCase
         $wrongUser = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for(TaskStatus::factory()->create(), 'status')
         ->create();
         $response = $this->actingAs($wrongUser)->delete(route('tasks.destroy', $task));

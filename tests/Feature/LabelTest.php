@@ -10,11 +10,10 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Label;
 
-
 class LabelFactoryTest extends TestCase
 {
     use RefreshDatabase;
- 
+
     /**
      * Test creating a new order.
      *
@@ -40,7 +39,7 @@ class LabelFactoryTest extends TestCase
     }
 
     public function testEditWithoutAuth()
-    {   
+    {
         $label = Label::factory()->create();
         $response = $this->get(route('labels.edit', $label));
         $response->assertForbidden();
@@ -100,7 +99,7 @@ class LabelFactoryTest extends TestCase
         $this->assertDatabaseHas('labels', $label->toArray());
 
         $task = Task::factory()
-        ->for($user, 'created_by')
+        ->for($user, 'createdBy')
         ->for($status, 'status')
         ->hasAttached($label)
         ->create();

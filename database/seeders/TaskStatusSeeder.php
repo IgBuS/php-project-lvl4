@@ -15,9 +15,8 @@ class TaskStatusSeeder extends Seeder
      */
     public function run()
     {
-        foreach(TaskStatus::getNames() as $status) {
+        foreach (TaskStatus::getNames() as $status) {
             TaskStatus::factory()->create(['name' => $status]);
         }
-
     }
 }

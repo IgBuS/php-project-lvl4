@@ -38,7 +38,7 @@
 <select class="form-select" id="assigned_to_id" name="assigned_to_id" aria-label="----------" >
     <option value="" selected disabled>----------</option>
     @foreach ($users as $user)
-        @if($user->id == old('assigned_to_id', optional($task->assigned_to)->id))
+        @if($user->id == old('assigned_to_id', optional($task->assignedTo)->id))
             <option value="{{$user->id}}"selected>{{$user->name}} </option>
         @else
             <option value="{{$user->id}}">{{$user->name}}</option>
@@ -50,7 +50,7 @@
 <div class="mb-3">
 <select multiple="multiple" name="labels[]" class="form-select" id="labels">
     @foreach ($labels as $label)
-        @if(in_array($label->id, old('labels', optional($task)->labels_ids())))
+        @if(in_array($label->id, old('labels', optional($task)->labelsIds())))
             <option value="{{$label->id}}"selected>{{$label->name}} </option>
         @else
             <option value="{{$label->id}}">{{$label->name}}</option>

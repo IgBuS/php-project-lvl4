@@ -24,7 +24,7 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index(Request $request)
     {
         $pespPersona = User::has('tasksAssignedTo')->orderBy('name', 'asc')->get();
@@ -84,7 +84,7 @@ class TaskController extends Controller
         ]);
         $task = new Task();
         $task->fill($validated);
-        $task->created_by_id=Auth::user()->id;
+        $task->created_by_id = Auth::user()->id;
         $task->save();
         $task->labels()->sync($request['labels']);
 
@@ -100,7 +100,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('tasks.show', compact('task')); 
+        return view('tasks.show', compact('task'));
     }
 
     /**

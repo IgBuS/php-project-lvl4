@@ -104,7 +104,7 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        if($label->tasks()->count() === 0){
+        if ($label->tasks()->count() === 0) {
             $label->delete();
             flash('Метка успешно удалена')->success();
             return redirect()->route('labels.index');
