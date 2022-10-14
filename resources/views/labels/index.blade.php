@@ -38,7 +38,7 @@
         <form action="{{ route('labels.destroy',$label) }}" method="post">
           @csrf
           @method('delete')
-          <button type="submit" class="btn btn-outline-danger btn-sm"> Удалить </button>
+          <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure?')"> Удалить </button>
         </form>
 
         <form action="{{ route('labels.edit',$label->id) }}" method="get">
