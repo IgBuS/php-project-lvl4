@@ -91,7 +91,7 @@ class LabelController extends Controller
         ]);
         $label->fill($validated);
         $label->save();
-        flash('Метка успешно обновлена')->success();
+        flash(__('flash.label_refresh'))->success();
         return redirect()
             ->route('labels.index');
     }
@@ -106,10 +106,10 @@ class LabelController extends Controller
     {
         if ($label->tasks()->count() === 0) {
             $label->delete();
-            flash('Метка успешно удалена')->success();
+            flash(__('flash.label_delete_success'))->success();
             return redirect()->route('labels.index');
         }
-        flash('Не удалось удалить метку')->error();
+        flash(__('flash.label_delete_error'))->error();
         return redirect()->route('labels.index');
     }
 }

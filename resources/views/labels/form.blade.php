@@ -10,11 +10,11 @@
 @endif
 
 <div class="mb-3">
-    <label for="name" name='name' class="form-label">Имя</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Название метки" value="{{old('name', optional($label)->name)}}">
+    <label for="name" name='name' class="form-label">{{__('label.name')}}</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{old('name', optional($label)->name)}}">
 </div>
 
 <div class="mb-3">
-  <label for="description" class="form-label">{{ Form::label('description', 'Описание') }}</label>
-  <textarea class="form-control" id="description" name="description" placeholder="Описание метки" rows="5">{{old('description', optional($label)->description)}}</textarea>
+  <label for="description" class="form-label">{{ Form::label('description', __('label.description')) }}</label>
+  <textarea class="form-control" id="description" name="description" rows="5">{{old('description', optional($label)->description)}}</textarea>
 </div>

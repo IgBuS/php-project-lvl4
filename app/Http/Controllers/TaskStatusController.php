@@ -90,7 +90,7 @@ class TaskStatusController extends Controller
         ]);
         $taskStatus->fill($validated);
         $taskStatus->save();
-        flash('Статус успешно обновлен')->success();
+        flash(__('flash.status_refresh'))->success();
         return redirect()
             ->route('task_statuses.index');
     }
@@ -105,10 +105,10 @@ class TaskStatusController extends Controller
     {
         if ($taskStatus->tasks()->count() === 0) {
             $taskStatus->delete();
-            flash('Статус успешно удален')->success();
+            flash(__('flash.status_delete_success'))->success();
             return redirect()->route('task_statuses.index');
         }
-        flash('Не удалось удалить статус')->error();
+        flash(__('flash.status_delete_error'))->error();
         return redirect()->route('task_statuses.index');
     }
 }

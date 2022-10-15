@@ -9,6 +9,6 @@
 @endif
 
 <div class="mb-3">
-    <label for="name" name='name' class="form-label">Имя</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Имя статуса" value="{{old('name', optional($taskStatus)->name)}}">
+    <label for="name" name='name' class="form-label">{{__('status.name')}}</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{old('name', optional($taskStatus)->name)}}">
 </div>

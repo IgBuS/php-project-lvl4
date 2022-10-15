@@ -3,13 +3,15 @@
 
 @section('content')
 
+<h1>{{__('task.title')}}</h1>
+
 <div class="mb-3">
 <form method="GET" action="/tasks" accept-charset="UTF-8" class="">
 <div class="form-row">
 
     <div class="col">
     <select class="form-select" id="filter[status_id]" name="filter[status_id]" aria-label="----------">
-      <option value="" selected>Статус</option>
+      <option value="" selected>{{__('task.status')}}</option>
       @foreach ($taskStatuses as $status)
           @if($status->id == optional(request()->query('filter'))['status_id'])
               <option value="{{$status->id}}"selected>{{$status->name}} </option>
@@ -22,7 +24,7 @@
 
     <div class="col">
     <select class="form-select" id="filter[created_by_id]" name="filter[created_by_id]" aria-label="----------" >
-      <option value="" selected>Автор</option>
+      <option value="" selected>{{__('task.author')}}</option>
       @foreach ($authors as $user)
           @if($user->id == optional(request()->query('filter'))['created_by_id'])
               <option value="{{$user->id}}"selected>{{$user->name}} </option>
@@ -35,7 +37,7 @@
 
     <div class="col">
     <select class="form-select" id="filter[assigned_to_id]" name="filter[assigned_to_id]" aria-label="----------" >
-      <option value="" selected>Исполнитель</option>
+      <option value="" selected>{{__('task.assigned_to')}}</option>
       @foreach ($pespPersona as $user)
           @if($user->id == optional(request()->query('filter'))['assigned_to_id'])
               <option value="{{$user->id}}"selected>{{$user->name}} </option>
@@ -47,12 +49,12 @@
     </div>
 
     <div class="col">
-        <input type="submit" class="btn btn-primary" value="Применить">
+        <input type="submit" class="btn btn-primary" value="{{__('buttons.execute')}}">
     </div>
 
     @auth
     <div class="ml-auto">
-      <a href="{{route('tasks.create')}}" class="btn btn-primary">Создать задачу</a>
+      <a href="{{route('tasks.create')}}" class="btn btn-primary">{{__('buttons.create_task')}}</a>
     </div>
   @endauth
     
@@ -64,14 +66,14 @@
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Статус</th>
-      <th scope="col">Имя</th>
-      <th scope="col">Автор</th>
-      <th scope="col">Исполнитель</th>
-      <th scope="col">Дата создания</th>
+      <th scope="col">{{__('task.id')}}</th>
+      <th scope="col">{{__('task.status')}}</th>
+      <th scope="col">{{__('task.name')}}</th>
+      <th scope="col">{{__('task.author')}}</th>
+      <th scope="col">{{__('task.assigned_to')}}</th>
+      <th scope="col">{{__('task.creation_date')}}</th>
       @auth
-      <th scope="col">Действия</th>
+      <th scope="col">{{__('task.actions')}}</th>
       @endauth
       
       
@@ -91,7 +93,9 @@
       
       @auth
       <td> 
-      <a href="{{route('tasks.edit', $task->id)}}">Редактировать</a></td>
+      <form action="{{ route('tasks.edit',$task) }}" method="get">
+          <button type="submit" class="btn btn-outline-info btn-sm"> {{__('buttons.edit')}} </button>
+        </form>
       @endauth
     </tr>
     @endforeach

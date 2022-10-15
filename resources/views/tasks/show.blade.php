@@ -9,10 +9,10 @@
 </h2>
 
 <div class="mb-3">
-<p>Имя: {{ $task->name }}</p>
-<p>Статус: {{ $task->status->name }}</p>
-<p>Описание: {{ $task->description }}</p>
-<p>Метки:
+<p>{{__('task.name')}}: {{ $task->name }}</p>
+<p>{{__('task.status')}}: {{ $task->status->name }}</p>
+<p>{{__('task.description')}}: {{ $task->description }}</p>
+<p>{{__('task.labels')}}:
 @foreach ($task->labelsNames() as $name)
 <span class="badge badge-info">{{$name}}</span>
 @endforeach

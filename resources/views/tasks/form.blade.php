@@ -10,17 +10,17 @@
 @endif
 
 <div class="mb-3">
-    <label for="name" name='name' class="form-label">Имя</label>
-    <input type="text" class="form-control" id="name" name="name" placeholder="Краткое название задачи" value="{{old('name', optional($task)->name)}}">
+    <label for="name" name='name' class="form-label">{{__('task.name')}}</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{old('name', optional($task)->name)}}">
 </div>
 
 <div class="mb-3">
-  <label for="description" class="form-label">{{ Form::label('description', 'Описание') }}</label>
-  <textarea class="form-control" id="description" name="description" placeholder="Описание сути задачи" rows="5">{{old('description', optional($task)->description)}}</textarea>
+  <label for="description" class="form-label">{{ Form::label('description', __('task.description')) }}</label>
+  <textarea class="form-control" id="description" name="description" rows="5">{{old('description', optional($task)->description)}}</textarea>
 </div>
 
 <div class="mb-3">
-<label for="status_id" class="form-label">{{ Form::label('status_id', 'Статус') }}</label>
+<label for="status_id" class="form-label">{{ Form::label('status_id', __('task.status')) }}</label>
 <select class="form-select" id="status_id" name="status_id" aria-label="----------">
     <option value="" selected disabled>----------</option>
     @foreach ($taskStatuses as $status)
@@ -34,7 +34,7 @@
 </div>
 
 <div class="mb-3">
-<label for="assigned_to_id" class="form-label">{{ Form::label('assigned_to_id', 'Исполнитель') }}</label>
+<label for="assigned_to_id" class="form-label">{{ Form::label('assigned_to_id', __('task.assigned_to')) }}</label>
 <select class="form-select" id="assigned_to_id" name="assigned_to_id" aria-label="----------" >
     <option value="" selected disabled>----------</option>
     @foreach ($users as $user)
