@@ -92,10 +92,20 @@
       <td>{{ $task->created_at }}</td>
       
       @auth
-      <td> 
-      <form action="{{ route('tasks.edit',$task) }}" method="get">
-          <button type="submit" class="btn btn-outline-info btn-sm"> {{__('buttons.edit')}} </button>
-        </form>
+      <td>
+        <div class="form-inline">
+          <form action="{{ route('tasks.edit',$task) }}" method="get">
+              <button type="submit" class="btn btn-outline-info btn-sm"> {{__('buttons.edit')}} </button>
+          </form>
+            @if(Auth::id() == $task->createdBy->id)
+              <form action="{{ route('tasks.destroy',$task) }}" method="post">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('{{__('warnings.sure')}}')"> {{__('buttons.delete')}} </button>
+              </form>
+            @endif
+        </div>
+      </td>
       @endauth
     </tr>
     @endforeach
