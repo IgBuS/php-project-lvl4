@@ -14,3 +14,4 @@ build:
 	npm run build
 	php artisan optimize
 	php artisan migrate --force
+	php artisan serve
