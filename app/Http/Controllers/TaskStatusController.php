@@ -49,7 +49,7 @@ class TaskStatusController extends Controller
         $status = new TaskStatus();
         $status->fill($validated);
         $status->save();
-
+        flash(__('flash.status_create_success'))->success();
         return redirect()
             ->route('task_statuses.index');
     }

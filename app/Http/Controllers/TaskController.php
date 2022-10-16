@@ -88,6 +88,7 @@ class TaskController extends Controller
         $task->save();
         $task->labels()->sync($request['labels']);
 
+        flash(__('flash.task_create_success'))->success();
         return redirect()
             ->route('tasks.index');
     }
@@ -156,7 +157,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-        flash('Статус успешно удален')->success();
+        flash(__('flash.delete'))->success();
         return redirect()->route('tasks.index');
     }
 }

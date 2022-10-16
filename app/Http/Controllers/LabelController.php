@@ -49,7 +49,7 @@ class LabelController extends Controller
         $label = new Label();
         $label->fill($validated);
         $label->save();
-
+        flash(__('flash.label_create_success'))->success();
         return redirect()
             ->route('labels.index');
     }
