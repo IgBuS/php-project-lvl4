@@ -44,11 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * The tasks that created by the user.
+     */
     public function tasksCreatedBy()
     {
         return $this->hasMany(Task::class, 'created_by_id');
     }
 
+    /**
+     * The tasks that assigned by the user.
+     */
     public function tasksAssignedTo()
     {
         return $this->hasMany(Task::class, 'assigned_to_id');

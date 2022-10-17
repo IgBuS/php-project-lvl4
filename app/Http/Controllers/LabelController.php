@@ -70,7 +70,7 @@ class LabelController extends Controller
      */
     public function show(Label $label)
     {
-        //
+        return redirect()->route('labels.index');
     }
 
     /**

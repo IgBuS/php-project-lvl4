@@ -30,7 +30,7 @@ class TaskStatusPolicy
      */
     public function view(?User $user, TaskStatus $taskStatus)
     {
-        return true;
+        return false;
     }
 
     /**
