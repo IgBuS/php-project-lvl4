@@ -28,7 +28,7 @@
     <tr>
       <td>{{ $taskStatus->id }}</td>
       <td>{{ $taskStatus->name }}</td>
-      <td>{{ $taskStatus->created_at }}</td>
+      <td>{{\Carbon\Carbon::parse($taskStatus->created_at)->format('d.m.Y') }}</td>
       @auth
       <td> 
       <div class="form-inline">

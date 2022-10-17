@@ -89,7 +89,7 @@
       </td>
       <td>{{ $task->createdBy->name }}</td>
       <td>{{ optional($task->assignedTo)->name }}</td>
-      <td>{{ $task->created_at }}</td>
+      <td>{{ \Carbon\Carbon::parse($task->created_at)->format('d.m.Y') }}</td>
       
       @auth
       <td>

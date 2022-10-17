@@ -28,7 +28,7 @@
       <td>{{ $label->id }}</td>
       <td>{{ $label->name }}</td>
       <td>{{ $label->description }}</td>
-      <td>{{ $label->created_at }}</td>
+      <td>{{\Carbon\Carbon::parse($label->created_at)->format('d.m.Y') }}</td>
       
       @auth
       <td> 
