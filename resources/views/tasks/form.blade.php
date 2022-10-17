@@ -1,17 +1,11 @@
-
-@if ($errors->any())
-    <div class="alert alert-danger" role="alert">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 <div class="mb-3">
     <label for="name" name='name' class="form-label">{{__('task.name')}}</label>
-    <input type="text" class="form-control" id="name" name="name" value="{{old('name', optional($task)->name)}}">
+    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{old('name', optional($task)->name)}}">
+    @error('name')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
 </div>
 
 <div class="mb-3">
@@ -21,7 +15,7 @@
 
 <div class="mb-3">
 <label for="status_id" class="form-label">{{ Form::label('status_id', __('task.status')) }}</label>
-<select class="form-select" id="status_id" name="status_id" aria-label="----------">
+<select class="form-control @error('status_id') is-invalid @enderror" id="status_id" name="status_id" aria-label="----------">
     <option value="" selected disabled>----------</option>
     @foreach ($taskStatuses as $status)
         @if($status->id == old('status_id', optional($task->status)->id))
@@ -31,6 +25,11 @@
         @endif
     @endforeach
 </select>
+@error('status_id')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
 </div>
 
 <div class="mb-3">

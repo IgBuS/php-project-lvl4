@@ -43,9 +43,16 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'unique:task_statuses'
-        ]);
+        $rules = [
+            'name' => 'required|unique:task_statuses',
+        ];
+    
+        $customMessages = [
+            'required' => __('flash.status_create_name_require'),
+            'unique' => __('flash.status_create_name_unique')
+        ];
+
+        $validated = $request->validate($rules, $customMessages);
         $status = new TaskStatus();
         $status->fill($validated);
         $status->save();
@@ -85,9 +92,17 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        $validated = $request->validate([
-            'name' => 'unique:task_statuses'
-        ]);
+        $rules = [
+            'name' => 'required|unique:task_statuses',
+        ];
+    
+        $customMessages = [
+            'required' => __('flash.create_name_require'),
+            'unique' => __('flash.status_create_name_unique')
+        ];
+
+        $validated = $request->validate($rules, $customMessages);
+
         $taskStatus->fill($validated);
         $taskStatus->save();
         flash(__('flash.status_refresh'))->success();

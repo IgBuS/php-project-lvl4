@@ -76,12 +76,20 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
+        $rules = [
+            'name' => 'required|unique:tasks',
             'status_id' => 'required',
             'description' => 'nullable',
             'assigned_to_id' => 'nullable'
-        ]);
+        ];
+    
+        $customMessages = [
+            'required' => __('flash.create_name_require'),
+            'unique' => __('flash.task_create_name_unique')
+        ];
+
+        $validated = $request->validate($rules, $customMessages);
+        
         $task = new Task();
         $task->fill($validated);
         $task->created_by_id = Auth::user()->id;
@@ -134,12 +142,20 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $validated = $request->validate([
-            'name' => 'required',
+        $rules = [
+            'name' => 'required|unique:tasks',
             'status_id' => 'required',
             'description' => 'nullable',
             'assigned_to_id' => 'nullable'
-        ]);
+        ];
+    
+        $customMessages = [
+            'required' => __('flash.create_name_require'),
+            'unique' => __('flash.task_create_name_unique')
+        ];
+
+        $validated = $request->validate($rules, $customMessages);
+
         $task->fill($validated);
         $task->labels()->sync($request['labels']);
         $task->save();

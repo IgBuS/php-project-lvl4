@@ -42,10 +42,18 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
+        $rules = [
+            'name' => 'required|unique:labels',
             'description' => 'nullable'
-        ]);
+        ];
+    
+        $customMessages = [
+            'required' => __('flash.create_name_require'),
+            'unique' => __('flash.label_create_name_unique')
+        ];
+
+        $validated = $request->validate($rules, $customMessages);
+
         $label = new Label();
         $label->fill($validated);
         $label->save();
@@ -85,10 +93,18 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        $validated = $request->validate([
-            'name' => 'required',
+        $rules = [
+            'name' => 'required|unique:labels',
             'description' => 'nullable'
-        ]);
+        ];
+    
+        $customMessages = [
+            'required' => __('flash.create_name_require'),
+            'unique' => __('flash.label_create_name_unique')
+        ];
+
+        $validated = $request->validate($rules, $customMessages);
+        
         $label->fill($validated);
         $label->save();
         flash(__('flash.label_refresh'))->success();
