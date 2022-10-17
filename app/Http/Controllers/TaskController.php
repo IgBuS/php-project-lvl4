@@ -92,9 +92,7 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->fill($validated);
-
-        $user = Auth::user() ?? 1;
-        $task->created_by_id = $user['id'];
+        $task->created_by_id = optional(Auth::user())->id;
         $task->save();
         $task->labels()->sync($request['labels']);
 
