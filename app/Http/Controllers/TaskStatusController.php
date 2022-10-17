@@ -48,7 +48,7 @@ class TaskStatusController extends Controller
         ];
     
         $customMessages = [
-            'required' => __('flash.status_create_name_require'),
+            'required' => __('flash.create_name_require'),
             'unique' => __('flash.status_create_name_unique')
         ];
 
