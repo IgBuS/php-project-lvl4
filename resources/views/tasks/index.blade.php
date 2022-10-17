@@ -82,7 +82,7 @@
   <tbody>
     @foreach ($tasks as $task)
     <tr>
-      <th scope="row">{{ $task->id }}</th>
+      <td>{{ $task->id }}</td>
       <td>{{ $task->status->name }}</td>
       <td>
         <a class="link " href="/tasks/{{$task->id}}">{{ $task->name }}</a>

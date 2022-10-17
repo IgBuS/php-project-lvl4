@@ -26,8 +26,8 @@
   <tbody>
     @foreach ($taskStatuses as $taskStatus)
     <tr>
-      <th scope="row">{{ $taskStatus->id }}</th>
-      <th scope="row">{{ $taskStatus->name }}</th>
+      <td>{{ $taskStatus->id }}</td>
+      <td>{{ $taskStatus->name }}</td>
       <td>{{ $taskStatus->created_at }}</td>
       @auth
       <td> 
