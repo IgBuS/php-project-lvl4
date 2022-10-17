@@ -93,17 +93,26 @@
       
       @auth
       <td>
+      @if(Auth::id() == $task->createdBy->id)
         <div class="form-inline">
-          <form action="{{ route('tasks.edit',$task) }}" method="get">
-              <button type="submit" class="btn btn-outline-info btn-sm"> {{__('buttons.edit')}} </button>
-          </form>
-            @if(Auth::id() == $task->createdBy->id)
-              <form action="{{ route('tasks.destroy',$task) }}" method="post">
-                  @csrf
-                  @method('delete')
-                  <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('{{__('warnings.sure')}}')"> {{__('buttons.delete')}} </button>
-              </form>
-            @endif
+        <a class="btn btn-outline-danger btn-sm"
+        href="{{ route('tasks.destroy', $task) }}"
+        onclick="event.preventDefault();
+        confirm('{{__('warnings.sure')}}');
+        document.getElementById('delete-form-{{ $task->id }}').submit();">
+        {{__('buttons.delete')}}
+        </a>
+
+        <form id="delete-form-{{ $task->id }}" action="{{ route('tasks.destroy',  $task) }}"
+            method="POST" style="display: none;">
+            @csrf
+            @method('delete')
+        </form>
+      @endif
+      <a class="btn btn-outline-info btn-sm"
+        href="{{ route('tasks.edit',$task->id) }}">
+        {{__('buttons.edit')}} </a>
+
         </div>
       </td>
       @endauth

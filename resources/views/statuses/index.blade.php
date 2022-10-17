@@ -27,23 +27,29 @@
     @foreach ($taskStatuses as $taskStatus)
     <tr>
       <th scope="row">{{ $taskStatus->id }}</th>
-        <td>
-            <a class="link " href="/task_statuses/{{$taskStatus->id}}">{{ $taskStatus->name }}</a>
-        </td>
+      <th scope="row">{{ $taskStatus->name }}</th>
       <td>{{ $taskStatus->created_at }}</td>
       @auth
       <td> 
       <div class="form-inline">
 
-        <form action="{{ route('task_statuses.destroy',$taskStatus) }}" method="post">
+      <a class="btn btn-outline-danger btn-sm"
+        href="{{ route('task_statuses.destroy', $taskStatus) }}"
+        onclick="event.preventDefault();
+        confirm('{{__('warnings.sure')}}');
+        document.getElementById('delete-form-{{ $taskStatus->id }}').submit();">
+        {{__('buttons.delete')}}
+      </a>
+
+      <form id="delete-form-{{ $taskStatus->id }}" action="{{ route('task_statuses.destroy',  $taskStatus) }}"
+          method="POST" style="display: none;">
           @csrf
           @method('delete')
-          <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('{{__('warnings.sure')}}')"> {{__('buttons.delete')}} </button>
-        </form>
+      </form>
 
-        <form action="{{ route('task_statuses.edit',$taskStatus->id) }}" method="get">
-          <button type="submit" class="btn btn-outline-info btn-sm"> {{__('buttons.edit')}} </button>
-        </form>
+      <a class="btn btn-outline-info btn-sm"
+        href="{{ route('task_statuses.edit',$taskStatus->id) }}">
+        {{__('buttons.edit')}} </a>
 
       </div>
     </td>

@@ -157,7 +157,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-        flash(__('flash.delete'))->success();
+        flash(__('flash.task_delete'))->success();
         return redirect()->route('tasks.index');
     }
 }

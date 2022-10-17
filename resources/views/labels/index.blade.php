@@ -34,15 +34,23 @@
       <td> 
       <div class="form-inline">
 
-        <form action="{{ route('labels.destroy',$label) }}" method="post">
+      <a class="btn btn-outline-danger btn-sm"
+        href="{{ route('labels.destroy', $label) }}"
+        onclick="event.preventDefault();
+        confirm('{{__('warnings.sure')}}');
+        document.getElementById('delete-form-{{ $label->id }}').submit();">
+        {{__('buttons.delete')}}
+      </a>
+
+      <form id="delete-form-{{ $label->id }}" action="{{ route('labels.destroy',  $label) }}"
+          method="POST" style="display: none;">
           @csrf
           @method('delete')
-          <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('{{__('warnings.sure')}}')"> {{__('buttons.delete')}} </button>
-        </form>
+      </form>
 
-        <form action="{{ route('labels.edit',$label->id) }}" method="get">
-          <button type="submit" class="btn btn-outline-info btn-sm"> {{__('buttons.edit')}} </button>
-        </form>
+      <a class="btn btn-outline-info btn-sm"
+        href="{{ route('labels.edit',$label->id) }}">
+        {{__('buttons.edit')}} </a>
 
       </div>
     </td>
