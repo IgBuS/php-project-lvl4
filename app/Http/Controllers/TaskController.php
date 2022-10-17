@@ -73,7 +73,6 @@ class TaskController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * @var User
      */
     public function store(Request $request)
     {
@@ -94,7 +93,7 @@ class TaskController extends Controller
         $task = new Task();
         $task->fill($validated);
 
-        $user = Auth::user();
+        $user = Auth::user() ?? 1;
         $task->created_by_id = $user['id'];
         $task->save();
         $task->labels()->sync($request['labels']);
