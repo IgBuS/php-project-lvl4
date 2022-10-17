@@ -46,7 +46,7 @@ class LabelController extends Controller
             'name' => 'required|unique:labels',
             'description' => 'nullable'
         ];
-    
+
         $customMessages = [
             'required' => __('flash.create_name_require'),
             'unique' => __('flash.label_create_name_unique')
@@ -97,14 +97,14 @@ class LabelController extends Controller
             'name' => 'required|unique:labels',
             'description' => 'nullable'
         ];
-    
+
         $customMessages = [
             'required' => __('flash.create_name_require'),
             'unique' => __('flash.label_create_name_unique')
         ];
 
         $validated = $request->validate($rules, $customMessages);
-        
+
         $label->fill($validated);
         $label->save();
         flash(__('flash.label_refresh'))->success();

@@ -46,7 +46,7 @@ class TaskStatusController extends Controller
         $rules = [
             'name' => 'required|unique:task_statuses',
         ];
-    
+
         $customMessages = [
             'required' => __('flash.create_name_require'),
             'unique' => __('flash.status_create_name_unique')
@@ -95,7 +95,7 @@ class TaskStatusController extends Controller
         $rules = [
             'name' => 'required|unique:task_statuses',
         ];
-    
+
         $customMessages = [
             'required' => __('flash.create_name_require'),
             'unique' => __('flash.status_create_name_unique')

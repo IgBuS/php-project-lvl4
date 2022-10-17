@@ -82,14 +82,14 @@ class TaskController extends Controller
             'description' => 'nullable',
             'assigned_to_id' => 'nullable'
         ];
-    
+
         $customMessages = [
             'required' => __('flash.create_name_require'),
             'unique' => __('flash.task_create_name_unique')
         ];
 
         $validated = $request->validate($rules, $customMessages);
-        
+
         $task = new Task();
         $task->fill($validated);
         $task->created_by_id = Auth::user()->id;
@@ -148,7 +148,7 @@ class TaskController extends Controller
             'description' => 'nullable',
             'assigned_to_id' => 'nullable'
         ];
-    
+
         $customMessages = [
             'required' => __('flash.create_name_require'),
             'unique' => __('flash.task_create_name_unique')
