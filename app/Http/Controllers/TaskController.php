@@ -73,7 +73,7 @@ class TaskController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * @var User 
+     * @var User
      */
     public function store(Request $request)
     {
