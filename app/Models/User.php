@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     /**
      * The tasks that assigned by the user.
-     ** @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function tasksAssignedTo()
     {
