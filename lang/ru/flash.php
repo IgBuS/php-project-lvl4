@@ -11,7 +11,7 @@ return [
     "label_create_success" => "Метка успешно создана",
     "status_create_success" => "Статус успешно создан",
     'status_refresh' => "Статус успешно изменён",
-    'status_delete_success' => "Статус успешно удален",
+    'status_delete_success' => "Статус успешно удалён",
     'status_delete_error' => "Не удалось удалить статус",
 
 ];
