@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Auth\AuthenticationException;
+use Exception;
 
 class TaskController extends Controller
 {
@@ -83,7 +83,7 @@ class TaskController extends Controller
         $task->fill($validated);
         try {
             $task->created_by_id = optional(Auth::user())->id;
-        } catch (AuthenticationException $e) {
+        } catch (Exception $e) {
             flash('User is not authenticated')->error();
             return back()->withInput();
         }
