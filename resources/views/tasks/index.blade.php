@@ -3,54 +3,26 @@
 
 @section('content')
 
-<h1>{{__('task.title')}}</h1>
+<h1>{{__('pages.task.title')}}</h1>
 
 <div class="mb-3">
-<form method="GET" action="/tasks" accept-charset="UTF-8" class="">
-<div class="form-row">
+<div class="d-flex">
+{{ Form::open(['url' => route('tasks.index'), 'method' => 'get', 'class' => 'form-inline']) }}
+{{ Form::select('filter[status_id]', $taskStatuses, Arr::get($filter, 'status_id', ''), [
+  'class' => 'form-control mr-2',
+  'placeholder' => __('pages.task.status_id')
+  ]) }}
+{{ Form::select('filter[created_by_id]', $authors, Arr::get($filter, 'created_by_id', ''), [
+  'class' => 'form-control mr-2',
+  'placeholder' => __('pages.task.author')
+  ]) }}
+{{ Form::select('filter[assigned_to_id]', $pespPerson, Arr::get($filter, 'assigned_to_id', ''), [
+  'class' => 'form-control mr-2',
+  'placeholder' => __('pages.task.assigned_to_id')
+  ]) }}
 
-    <div class="col">
-    <select class="form-select" id="filter[status_id]" name="filter[status_id]" aria-label="----------">
-      <option value="" selected>{{__('task.status')}}</option>
-      @foreach ($taskStatuses as $status)
-          @if($status->id == optional(request()->query('filter'))['status_id'])
-              <option value="{{$status->id}}"selected>{{$status->name}} </option>
-          @else
-              <option value="{{$status->id}}">{{$status->name}}</option>
-          @endif
-      @endforeach
-    </select>
-    </div>
-
-    <div class="col">
-    <select class="form-select" id="filter[created_by_id]" name="filter[created_by_id]" aria-label="----------" >
-      <option value="" selected>{{__('task.author')}}</option>
-      @foreach ($authors as $user)
-          @if($user->id == optional(request()->query('filter'))['created_by_id'])
-              <option value="{{$user->id}}"selected>{{$user->name}} </option>
-          @else
-              <option value="{{$user->id}}">{{$user->name}}</option>
-          @endif
-      @endforeach
-    </select>
-    </div>
-
-    <div class="col">
-    <select class="form-select" id="filter[assigned_to_id]" name="filter[assigned_to_id]" aria-label="----------" >
-      <option value="" selected>{{__('task.assigned_to')}}</option>
-      @foreach ($pespPersona as $user)
-          @if($user->id == optional(request()->query('filter'))['assigned_to_id'])
-              <option value="{{$user->id}}"selected>{{$user->name}} </option>
-          @else
-              <option value="{{$user->id}}">{{$user->name}}</option>
-          @endif
-      @endforeach
-    </select>
-    </div>
-
-    <div class="col">
-        <input type="submit" class="btn btn-primary" value="{{__('buttons.execute')}}">
-    </div>
+  {{ Form::submit(__('buttons.execute'), ['class' => 'btn btn-outline-primary mr-2']) }}
+  {{ Form::close() }}
 
     @auth
     <div class="ml-auto">
@@ -59,21 +31,20 @@
   @endauth
     
 </div>
-</form>
 </div>
 
 <div class="mb-3">
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">{{__('task.id')}}</th>
-      <th scope="col">{{__('task.status')}}</th>
-      <th scope="col">{{__('task.name')}}</th>
-      <th scope="col">{{__('task.author')}}</th>
-      <th scope="col">{{__('task.assigned_to')}}</th>
-      <th scope="col">{{__('task.creation_date')}}</th>
+      <th scope="col">{{__('pages.task.id')}}</th>
+      <th scope="col">{{__('pages.task.status_id')}}</th>
+      <th scope="col">{{__('pages.task.name')}}</th>
+      <th scope="col">{{__('pages.task.author')}}</th>
+      <th scope="col">{{__('pages.task.assigned_to_id')}}</th>
+      <th scope="col">{{__('pages.task.creation_date')}}</th>
       @auth
-      <th scope="col">{{__('task.actions')}}</th>
+      <th scope="col">{{__('pages.task.actions')}}</th>
       @endauth
       
       
@@ -95,7 +66,7 @@
       <td>
       @if(Auth::id() == $task->createdBy->id)
         <div class="form-inline">
-        <a class="btn btn-outline-danger btn-sm"
+        <a class="btn btn-outline-danger btn-sm mr-3"
         href="{{ route('tasks.destroy', $task) }}"
         onclick="event.preventDefault();
         confirm('{{__('warnings.sure')}}');

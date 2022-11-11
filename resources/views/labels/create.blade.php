@@ -4,6 +4,6 @@
 
 {{ Form::model($label, ['route' => 'labels.store']) }}
     @include('labels.form')
-    <button type="submit" class="btn btn-primary">{{ __('buttons.create') }}</button>
+    {{ Form::submit(__('buttons.create'), ['class' => 'btn btn-primary']) }}
 {{ Form::close() }}
 @endsection

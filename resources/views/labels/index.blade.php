@@ -2,7 +2,7 @@
 
 
 @section('content')
-<h1>{{__('label.title')}}</h1>
+<h1>{{__('pages.label.title')}}</h1>
   @auth
   <div class="mb-3">
     <a href="{{route('labels.create')}}" class="btn btn-primary">{{__('buttons.create_label')}}</a>
@@ -11,12 +11,12 @@
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">{{__('label.id')}}</th>
-      <th scope="col">{{__('label.name')}}</th>
-      <th scope="col">{{__('label.description')}}</th>
-      <th scope="col">{{__('label.creation_date')}}</th>
+      <th scope="col">{{__('pages.label.id')}}</th>
+      <th scope="col">{{__('pages.label.name')}}</th>
+      <th scope="col">{{__('pages.label.description')}}</th>
+      <th scope="col">{{__('pages.label.creation_date')}}</th>
       @auth
-      <th scope="col">{{__('label.actions')}}</th>
+      <th scope="col">{{__('pages.label.actions')}}</th>
       @endauth
       
       
@@ -34,7 +34,7 @@
       <td> 
       <div class="form-inline">
 
-      <a class="btn btn-outline-danger btn-sm"
+      <a class="btn btn-outline-danger btn-sm mr-3"
         href="{{ route('labels.destroy', $label) }}"
         onclick="event.preventDefault();
         confirm('{{__('warnings.sure')}}');

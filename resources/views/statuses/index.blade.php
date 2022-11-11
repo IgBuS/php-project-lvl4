@@ -3,7 +3,7 @@
 
 @section('content')
 
-<h1>{{__('status.title')}}</h1>
+<h1>{{__('pages.status.title')}}</h1>
   @auth
   <div class="mb-3">
     <a href="{{route('task_statuses.create')}}" class="btn btn-primary">{{__('buttons.create_status')}}</a>
@@ -13,11 +13,11 @@
   <table class="table">
   <thead>
     <tr>
-      <th scope="col">{{__('status.id')}}</th>
-      <th scope="col">{{__('status.name')}}</th>
-      <th scope="col">{{__('status.creation_date')}}</th>
+      <th scope="col">{{__('pages.status.id')}}</th>
+      <th scope="col">{{__('pages.status.name')}}</th>
+      <th scope="col">{{__('pages.status.creation_date')}}</th>
       @auth
-      <th scope="col">{{__('status.actions')}}</th>
+      <th scope="col">{{__('pages.status.actions')}}</th>
       @endauth
       
       
@@ -33,7 +33,7 @@
       <td> 
       <div class="form-inline">
 
-      <a class="btn btn-outline-danger btn-sm"
+      <a class="btn btn-outline-danger btn-sm mr-3"
         href="{{ route('task_statuses.destroy', $taskStatus) }}"
         onclick="event.preventDefault();
         confirm('{{__('warnings.sure')}}');

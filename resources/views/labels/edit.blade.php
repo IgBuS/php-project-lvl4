@@ -2,6 +2,6 @@
 @section('content')
 {{ Form::model($label, ['route' => ['labels.update', $label], 'method' => 'PATCH']) }}
     @include('labels.form')
-    <button type="submit" class="btn btn-primary">{{__('buttons.refresh')}}</button>
+    {{ Form::submit(__('buttons.refresh'), ['class' => 'btn btn-primary']) }}
 {{ Form::close() }}
 @endsection

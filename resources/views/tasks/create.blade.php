@@ -4,8 +4,6 @@
 
 {{ Form::model($task, ['route' => 'tasks.store']) }}
     @include('tasks.form')
-    <div>
-        <button type="submit" class="btn btn-primary">{{__('buttons.create')}}</button>
-    </div>
+    {{ Form::submit(__('buttons.create'), ['class' => 'btn btn-primary']) }}
 {{ Form::close() }}
 @endsection
