@@ -84,7 +84,7 @@ class TaskController extends Controller
             $task->created_by_id = optional(Auth::user())->id;
         } catch (AuthenticationException $e) {
             flash('User is not authenticated')->error();
-            return back()->withInput();;
+            return back()->withInput();
         }
         $task->save();
 
