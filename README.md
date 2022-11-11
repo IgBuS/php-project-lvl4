@@ -2,7 +2,7 @@
 [![hexlet-check](https://github.com/IgBuS/php-project-lvl4/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/IgBuS/php-project-lvl4/actions/workflows/hexlet-check.yml)
 
 
-Public app limk - https://web-production-0da7.up.railway.app/task_statuses
+Public app limk - https://web-production-0da7.up.railway.app/
 
 Simple Task Manager on Laravel
 
