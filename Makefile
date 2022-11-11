@@ -2,7 +2,10 @@ console:
 	./vendor/bin/psysh
 
 install:
-	composer install
+	composer install --no-progress --prefer-dist --optimize-autoloader
+	php artisan key:generate
+	php artisan config:clear
+	php artisan migrate -v
 
 start:
 	php artisan serve --host 0.0.0.0 --port 3000
