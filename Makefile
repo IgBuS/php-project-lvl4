@@ -8,8 +8,8 @@ start:
 	php artisan serve --host 0.0.0.0 --port 3000
 	
 lint:
-	composer exec --verbose phpcs -- --standard=PSR12 app database config resources routes tests
-	composer exec --verbose phpstan -- --level=8 analyse app database config resources routes tests
+	composer exec --verbose phpcs -- --standard=PSR12 app database config routes tests
+	composer exec --verbose phpstan -- --level=8 analyse app database config routes tests
 	
 lint-fix:
 	composer exec phpcbf -- --standard=PSR12 app database config resources routes tests
