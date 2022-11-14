@@ -56,7 +56,7 @@
       <td>{{ $task->id }}</td>
       <td>{{ $task->status->name }}</td>
       <td>
-        <a class="link " href="/tasks/{{$task->id}}">{{ $task->name }}</a>
+        <a class="link " href="{{route('tasks.show', $task)}}">{{ $task->name }}</a>
       </td>
       <td>{{ $task->createdBy->name }}</td>
       <td>{{ optional($task->assignedTo)->name }}</td>
