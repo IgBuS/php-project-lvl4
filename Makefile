@@ -3,8 +3,11 @@ console:
 
 install:
 	composer install --no-progress --prefer-dist --optimize-autoloader
+	php -r "file_exists('.env') || copy('.env.example', '.env');"
 	php artisan key:generate
 	php artisan config:clear
+
+migrate:
 	php artisan migrate -v
 
 start:
