@@ -35,13 +35,6 @@ jobs:
           extensions: mbstring, dom, fileinfo, pgsql
           coverage: xdebug
 
-      - name: Cache composer dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
       - name: Install
         run: make setup
         env:
