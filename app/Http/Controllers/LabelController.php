@@ -44,7 +44,7 @@ class LabelController extends Controller
     {
         $rules = [
             'name' => 'required|unique:labels',
-            'description' => 'nullable'
+            'description' => 'nullable|max:500'
         ];
 
         $customMessages = [
@@ -95,7 +95,7 @@ class LabelController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'description' => 'nullable'
+            'description' => 'nullable|max:500'
         ];
 
         $customMessages = [

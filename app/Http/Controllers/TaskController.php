@@ -137,7 +137,7 @@ class TaskController extends Controller
         $rules = [
             'name' => 'required',
             'status_id' => 'required',
-            'description' => 'nullable',
+            'description' => 'nullable|max:255',
             'assigned_to_id' => 'nullable'
         ];
 
