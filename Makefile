@@ -10,6 +10,10 @@ install:
 migrate:
 	php artisan migrate -v
 
+setup:
+	make install
+	make migrate
+
 start:
 	php artisan serve --host 0.0.0.0 --port 3000
 	

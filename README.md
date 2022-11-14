@@ -30,9 +30,7 @@ Project is created with:
 ```sh
 $ git clone https://github.com/IgBuS/php-project-lvl4.git
 
-$ make install
-
-$ make migrate
+$ make setup
 ```
 
 ## Start
