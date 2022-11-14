@@ -94,7 +94,7 @@ class LabelController extends Controller
     public function update(Request $request, Label $label)
     {
         $rules = [
-            'name' => 'required|unique:labels',
+            'name' => 'required',
             'description' => 'nullable'
         ];
 

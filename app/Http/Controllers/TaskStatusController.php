@@ -93,7 +93,7 @@ class TaskStatusController extends Controller
     public function update(Request $request, TaskStatus $taskStatus)
     {
         $rules = [
-            'name' => 'required|unique:task_statuses',
+            'name' => 'required',
         ];
 
         $customMessages = [
