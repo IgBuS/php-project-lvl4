@@ -9,10 +9,10 @@
 </h2>
 
 <div class="mb-3">
-<p>{{__('task.name')}}: {{ $task->name }}</p>
-<p>{{__('task.status')}}: {{ $task->status->name }}</p>
-<p>{{__('task.description')}}: {{ $task->description }}</p>
-<p>{{__('task.labels')}}:
+<p>{{__('pages.task.name')}}: {{ $task->name }}</p>
+<p>{{__('pages.task.status_id')}}: {{ $task->status->name }}</p>
+<p>{{__('pages.task.description')}}: {{ $task->description }}</p>
+<p>{{__('pages.task.labels')}}:
 @foreach ($task->labelsNames() as $name)
 <span class="badge badge-info">{{$name}}</span>
 @endforeach
