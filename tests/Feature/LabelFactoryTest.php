@@ -10,7 +10,6 @@ use App\Models\Label;
 
 class LabelFactoryTest extends TestCase
 {
-
     /**
      * Test creating a new order.
      *

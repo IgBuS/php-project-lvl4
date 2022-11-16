@@ -10,7 +10,6 @@ use App\Models\Label;
 
 class TaskFactoryTest extends TestCase
 {
-
     /**
      * Test creating a new order.
      *

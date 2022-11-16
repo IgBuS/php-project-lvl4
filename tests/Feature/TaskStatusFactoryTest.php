@@ -9,7 +9,6 @@ use App\Models\User;
 
 class TaskStatusFactoryTest extends TestCase
 {
-
     /**
      * Test creating a new order.
      *
