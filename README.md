@@ -1,5 +1,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/1aaf2533df9923f6aa6c/maintainability)](https://codeclimate.com/github/IgBuS/php-project-lvl4/maintainability)
 [![hexlet-check](https://github.com/IgBuS/php-project-lvl4/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/IgBuS/php-project-lvl4/actions/workflows/hexlet-check.yml)
+[![PHP CI](https://github.com/IgBuS/php-project-lvl4/actions/workflows/CI.yml/badge.svg)](https://github.com/IgBuS/php-project-lvl4/actions/workflows/CI.yml)
 
 ## Table of contents
 * [General info](#general-info)
