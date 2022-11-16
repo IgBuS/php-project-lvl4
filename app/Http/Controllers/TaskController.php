@@ -35,10 +35,11 @@ class TaskController extends Controller
         $filter = $request->query('filter');
 
         $tasks = QueryBuilder::for(Task::class)
-        ->allowedFilters([AllowedFilter::exact('status_id'),
-                        AllowedFilter::exact('assigned_to_id'),
-                        AllowedFilter::exact('created_by_id')])
-        ->paginate();
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('assigned_to_id'),
+                AllowedFilter::exact('created_by_id')
+            ])->paginate();
 
         return view('tasks.index', compact('tasks', 'filter', 'pespPerson', 'taskStatuses', 'authors'));
     }

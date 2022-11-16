@@ -2,19 +2,14 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\TaskStatus;
 use App\Models\User;
 use App\Models\Task;
 use App\Models\Label;
-use Database\Seeders\TaskStatusSeeder;
-use Illuminate\Support\Facades\Auth;
 
 class TaskFactoryTest extends TestCase
 {
-    use RefreshDatabase;
 
     /**
      * Test creating a new order.
@@ -28,10 +23,10 @@ class TaskFactoryTest extends TestCase
 
 
         $tasks = Task::factory()
-                    ->count(3)
-                    ->for(User::factory()->make(), 'createdBy')
-                    ->for(TaskStatus::factory()->make(), 'status')
-                    ->make();
+            ->count(3)
+            ->for(User::factory()->make(), 'createdBy')
+            ->for(TaskStatus::factory()->make(), 'status')
+            ->make();
     }
 
     public function testIndex()
@@ -61,9 +56,9 @@ class TaskFactoryTest extends TestCase
     {
         $user = User::factory()->create();
         $task = Task::factory()
-        ->for(User::factory()->create(), 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->create();
+            ->for(User::factory()->create(), 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->create();
         $response = $this->actingAs($user)->get(route('tasks.edit', [$task]));
         $response->assertOk();
     }
@@ -72,9 +67,9 @@ class TaskFactoryTest extends TestCase
     {
         $user = User::factory()->create();
         $data = Task::factory()
-        ->for($user, 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->raw();
+            ->for($user, 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->raw();
         $response = $this->actingAs($user)->post(route('tasks.store'), $data);
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
@@ -87,16 +82,16 @@ class TaskFactoryTest extends TestCase
         $user = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->hasAttached(Label::factory()->create())
-        ->create();
+            ->for($user, 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->hasAttached(Label::factory()->create())
+            ->create();
 
         $data = Task::factory()
-        ->for($user, 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->hasAttached(Label::factory()->create())
-        ->raw();
+            ->for($user, 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->hasAttached(Label::factory()->create())
+            ->raw();
 
 
         $response = $this->actingAs($user)->patch(route('tasks.update', $task), $data);
@@ -111,14 +106,14 @@ class TaskFactoryTest extends TestCase
         $user = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->create();
+            ->for($user, 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->create();
 
         $data = Task::factory()
-        ->for($user, 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->raw();
+            ->for($user, 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->raw();
 
 
         $response = $this->patch(route('tasks.update', $task), $data);
@@ -132,9 +127,9 @@ class TaskFactoryTest extends TestCase
         $user = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->create();
+            ->for($user, 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->create();
         $response = $this->actingAs($user)->delete(route('tasks.destroy', $task));
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('tasks.index'));
@@ -149,9 +144,9 @@ class TaskFactoryTest extends TestCase
         $wrongUser = User::factory()->create();
 
         $task = Task::factory()
-        ->for($user, 'createdBy')
-        ->for(TaskStatus::factory()->create(), 'status')
-        ->create();
+            ->for($user, 'createdBy')
+            ->for(TaskStatus::factory()->create(), 'status')
+            ->create();
         $response = $this->actingAs($wrongUser)->delete(route('tasks.destroy', $task));
         $response->assertForbidden();
 

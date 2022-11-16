@@ -2,18 +2,13 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\TaskStatus;
 use App\Models\Task;
 use App\Models\User;
-use Database\Seeders\TaskStatusSeeder;
-use Illuminate\Support\Facades\Auth;
 
 class TaskStatusFactoryTest extends TestCase
 {
-    use RefreshDatabase;
 
     /**
      * Test creating a new order.
@@ -98,9 +93,9 @@ class TaskStatusFactoryTest extends TestCase
         $this->assertDatabaseHas('task_statuses', $status->toArray());
 
         $task = Task::factory()
-        ->for($user, 'createdBy')
-        ->for($status, 'status')
-        ->create();
+            ->for($user, 'createdBy')
+            ->for($status, 'status')
+            ->create();
 
         $response = $this->actingAs($user)->delete(route('task_statuses.destroy', $status));
         $response->assertRedirect(route('task_statuses.index'));

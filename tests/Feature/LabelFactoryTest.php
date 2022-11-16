@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\TaskStatus;
 use App\Models\Task;
@@ -12,7 +10,6 @@ use App\Models\Label;
 
 class LabelFactoryTest extends TestCase
 {
-    use RefreshDatabase;
 
     /**
      * Test creating a new order.
@@ -99,10 +96,10 @@ class LabelFactoryTest extends TestCase
         $this->assertDatabaseHas('labels', $label->toArray());
 
         $task = Task::factory()
-        ->for($user, 'createdBy')
-        ->for($status, 'status')
-        ->hasAttached($label)
-        ->create();
+            ->for($user, 'createdBy')
+            ->for($status, 'status')
+            ->hasAttached($label)
+            ->create();
 
         $response = $this->actingAs($user)->delete(route('labels.destroy', $label));
         $response->assertRedirect(route('labels.index'));
